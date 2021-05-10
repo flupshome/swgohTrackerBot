@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package serenno.slimPlayerArenaProfileResponse;
+
+option java_multiple_files = true;
+
+message SlimPlayerArenaProfileResponse {
+   string name = 1;
+   int32 level = 2;
+   int64 allyCode = 3;
+   string playerId = 4;
+   repeated SlimPlayerArenaStatus arenas = 5;
+   sint32 pvpOffset = 6;
+}
+enum SlimPlayerArenaType {
+   PlayerArena_None = 0;
+   SquadArena = 1;
+   FleetArena = 2;
+}
+message SlimPlayerArenaStatus {
+   SlimPlayerArenaType arena_type = 1;
+   int32 place = 2;
+   SlimArenaTeam arenaTeam = 3;
+}
+
+message SlimArenaTeam {
+   repeated SlimArenaUnit arenaUnit = 1;
+}
+
+message SlimArenaUnit {
+   int32 id = 1;
+   string defId = 2;
+   int32 index = 3;
+   SlimSlotType slotType = 12;
+}
+
+enum SlimSlotType {
+   SlotTypeNONE = 0;
+   UNIT = 1;
+   LEADER = 2;
+   CAPITAL_SHIP = 3;
+   REINFORCMENT = 5;
+}

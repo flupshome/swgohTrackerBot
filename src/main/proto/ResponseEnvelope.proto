@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package serenno.responseEnvelope;
+
+option java_multiple_files = true;
+
+enum ContentEncoding {
+   DEFAULTCONTENTENCODING = 0;
+   GZIPCONTENTENCODING = 1;
+}
+message DynamicMessage {
+    string id = 1 ;
+    string type = 2 ;
+    bytes data = 3;
+    int32 message_id = 4 ;
+}
+enum ResponseCode {
+   NONE = 0;
+   OK = 1;
+   ERROR = 2;
+   SERVERERROR = 3;
+   SESSIONEXPIRED = 4;
+   AUTHFAILED = 5;
+   RATEEXCEEDED = 6;
+   SERVERUNAVAILABLE = 7;
+   INVALIDREQUEST = 8;
+   INVALIDDATA = 9;
+   LEADERBOARDMATCHMAKINGERROR = 10;
+   UNAUTHORIZED = 11;
+   SUSPENDED = 12;
+   SERVEROUTAGE = 13;
+   NETWORKUNAVAILABLE = 20;
+   SEQUENCEHIGH = 30;
+   SEQUENCELOW = 31;
+   RECORDNOTFOUND = 32;
+   EVENTNOTFOUND = 33;
+   INSUFFICIENTRESOURCES = 40;
+   INVALIDCLIENTVERSION = 50;
+   FORCECLIENTRESTART = 51;
+   INCOMPATIBLEDEVICE = 52;
+   ACCOUNTUPDATED = 53;
+   INVALIDRECEIPT = 60;
+   PAYMENTPENDING = 61;
+   OPPONENTINBATTLE = 71;
+   UNDERATTACK = 72;
+   OPPONENTDATASTALE = 73;
+   BATTLETIMEDOUT = 74;
+   PLAYERRANKSTALE = 75;
+}
+message ResponseEnvelope {
+    int32 correlation_id = 1 ;
+    int64 current_server_time = 2 ;
+    bytes payload = 4;
+    ResponseCode code = 5;
+    string message = 6 ;
+    ContentEncoding content_encoding = 7;
+    string stack_trace = 8 ;
+    repeated DynamicMessage dynamic_message = 9;
+    string maintenance_message = 10 ;
+    string maintenance_link = 11 ;
+    int32 sub_code = 12 ;
+}

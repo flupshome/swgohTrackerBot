@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package serenno.authGuestRequest;
+
+option java_multiple_files = true;
+
+message AuthGuestRequest {
+    string uid = 1 ;
+    string device_platform = 2 ;
+    string language = 3 ;
+    string player_name = 4 ;
+    string bundle_id = 5 ;
+    string region = 6 ;
+    sint32 local_time_zone_offset_minutes = 7 ;
+    SessionStartContext session_start_context = 8 ;
+    DevicePreferences device_preferences = 9;
+}
+message DevicePreferences {
+    bool pushnotes_allowed = 1 ;
+    bool music_setting = 2 ;
+    bool sfx_setting = 3 ;
+    string network_connection = 4 ;
+}
+enum SessionStartContext {
+   PUSHNOTE = 0;
+   NORMALAPPSTART = 1;
+   RESUME = 2;
+   RESTART = 3;
+}

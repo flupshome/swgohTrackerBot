@@ -1,0 +1,270 @@
+syntax = "proto3";
+
+package serenno.playerProfileResponse;
+
+option java_multiple_files = true;
+
+message CurrencyItem {
+   CurrencyType currency = 1;
+   int32 quantity = 2;
+}
+enum CurrencyType {
+   CURRENCY_TYPE_NONE = 0;
+   GRIND = 1;
+   PREMIUM = 2;
+   REAL_MONEY = 3;
+   SOCIAL = 4;
+   IGC_EVENT_KEYCARD = 8;
+   XP_EVENT_KEYCARD = 9;
+   PVP_CURRENCY = 10;
+   FORCE_POINT = 11;
+   PVP_SHIP_CURRENCY = 12;
+   FREE = 13;
+   WAR_SHIP_CURRENCY = 14;
+   GRIND_TICKET = 15;
+   SHARD_CURRENCY = 16;
+   GUILD_CURRENCY = 17;
+   GUILD_BANK_CURRENCY = 18;
+   SHIP_GRIND = 19;
+   GUILD_RAID_CURRENCY_01 = 20;
+   GUILD_RAID_CURRENCY_02 = 21;
+   GUILD_RAID_CURRENCY_03 = 22;
+   GUILD_RAID_CURRENCY_04 = 23;
+   GUILD_RAID_CURRENCY_05 = 24;
+   GUILD_RAID_CURRENCY_06 = 25;
+   GUILD_RAID_CURRENCY_07 = 26;
+   GUILD_RAID_CURRENCY_08 = 27;
+   GUILD_RAID_CURRENCY_09 = 28;
+   GUILD_RAID_CURRENCY_10 = 29;
+   GUILD_RAID_CURRENCY_11 = 30;
+   GUILD_RAID_CURRENCY_12 = 31;
+}
+message EquipmentSlot {
+   string equipment_id = 1;
+   int32 slot = 2;
+}
+message PlayerProfileResponse {
+   string name = 1;
+   int32 level = 2;
+   //int64 pvp_wins = 3;
+   //int64 pvp_losses = 4;
+   //int32 pvp_rank = 5;
+   int64 allyCode = 6;
+   string playerId = 7;
+   repeated Unit roster = 8;
+   //repeated string pvp_squad_unit_ids = 9;
+   repeated PlayerProfileStat stats = 10;
+   string guildId = 11;
+   string guildName = 12;
+   string guildLogo = 13;
+   string guildLogoBackground = 14;
+   string guildBannerColor = 15;
+   string guildBannerLogo = 16;
+   repeated PlayerArenaStatus arenas = 17;
+   // currentPlayerTitle = 19;
+   // repeated unlockedPlayerTile = 20;
+   // guildTypeId = 21;
+   // unknown = 22;
+   // unknown = 23;
+   // currentPlayerPortrait = 24;
+   // repeated playerPortrait = 25;
+   // repeated ga = 26;
+   // unknown1 = 27;
+}
+message PlayerProfileStat {
+   string name_key = 1;
+   //string version_key = 2; // TODO
+   int64 value = 3;
+   int32 index = 4;
+}
+enum Rarity {
+   ZERO_STAR = 0;
+   ONE_STAR = 1;
+   TWO_STAR = 2;
+   THREE_STAR = 3;
+   FOUR_STAR = 4;
+   FIVE_STAR = 5;
+   SIX_STAR = 6;
+   SEVEN_STAR = 7;
+   NO_STAR = 8;
+}
+message Skill {
+   string id = 1;
+   int32 tier = 2;
+}
+message Stat {
+   string stat_id = 1;
+   UnitStat unit_stat_id = 3;
+   int32 stat_value_decimal_old = 4;
+   int64 stat_value_decimal = 5;
+}
+message StatDef {
+   repeated Stat stat = 19;
+}
+message StatMod {
+   string id = 1;
+   string definition_id = 2;
+   int32 level = 4;
+   StatModTier tier = 5;
+   CurrencyItem sell_value = 9;
+   CurrencyItem remove_cost = 10;
+   bool locked = 11;
+   StatModStat primary_stat = 12;
+   repeated StatModStat secondary_stat = 13;
+   int32 xp = 14;
+   CurrencyItem level_cost = 15;
+}
+message StatModStat {
+   string updater_id = 1;
+   Stat stat = 2;
+   repeated string roll = 3;
+}
+enum StatModTier {
+   STATMOD_TIER_00 = 0;
+   STATMOD_TIER_01 = 1;
+   STATMOD_TIER_02 = 2;
+   STATMOD_TIER_03 = 3;
+   STATMOD_TIER_04 = 4;
+   STATMOD_TIER_05 = 5;
+   STATMOD_TIER_06 = 6;
+   STATMOD_TIER_07 = 7;
+   STATMOD_TIER_08 = 8;
+}
+message Unit {
+   string id = 1;
+   string definition_id = 2;
+   Rarity current_rarity = 8;
+   int32 current_level = 9;
+   int32 current_xp = 10;
+   string promotion_recipe_reference = 12;
+   repeated Skill skill = 16;
+   StatDef unit_stat = 17;
+   repeated EquipmentSlot equipment = 18;
+   UnitTier current_tier = 19;
+   repeated string equipped_stat_mod_old = 20;
+   repeated StatMod equipped_stat_mod = 21;
+}
+enum UnitStat {
+   UNIT_STAT_NONE = 0;
+   UNIT_STAT_MAX_HEALTH = 1;
+   UNIT_STAT_STRENGTH = 2;
+   UNIT_STAT_AGILITY = 3;
+   UNIT_STAT_INTELLIGENCE = 4;
+   UNIT_STAT_SPEED = 5;
+   UNIT_STAT_ATTACK_DAMAGE = 6;
+   UNIT_STAT_ABILITY_POWER = 7;
+   UNIT_STAT_ARMOR = 8;
+   UNIT_STAT_SUPPRESSION = 9;
+   UNIT_STAT_ARMOR_PENETRATION = 10;
+   UNIT_STAT_SUPPRESSION_PENETRATION = 11;
+   UNIT_STAT_DODGE_RATING = 12;
+   UNIT_STAT_DEFLECTION_RATING = 13;
+   UNIT_STAT_ATTACK_CRITICAL_RATING = 14;
+   UNIT_STAT_ABILITY_CRITICAL_RATING = 15;
+   UNIT_STAT_CRITICAL_DAMAGE = 16;
+   UNIT_STAT_ACCURACY = 17;
+   UNIT_STAT_RESISTANCE = 18;
+   UNIT_STAT_DODGE_PERCENT_ADDITIVE = 19;
+   UNIT_STAT_DEFLECTION_PERCENT_ADDITIVE = 20;
+   UNIT_STAT_ATTACK_CRITICAL_PERCENT_ADDITIVE = 21;
+   UNIT_STAT_ABILITY_CRITICAL_PERCENT_ADDITIVE = 22;
+   UNIT_STAT_ARMOR_PERCENT_ADDITIVE = 23;
+   UNIT_STAT_SUPPRESSION_PERCENT_ADDITIVE = 24;
+   UNIT_STAT_ARMOR_PENETRATION_PERCENT_ADDITIVE = 25;
+   UNIT_STAT_SUPPRESSION_PENETRATION_PERCENT_ADDITIVE = 26;
+   UNIT_STAT_HEALTH_STEAL = 27;
+   UNIT_STAT_MAX_SHIELD = 28;
+   UNIT_STAT_SHIELD_PENETRATION = 29;
+   UNIT_STAT_HEALTH_REGEN = 30;
+   UNIT_STAT_ATTACK_DAMAGE_PERCENT_ADDITIVE = 31;
+   UNIT_STAT_ABILITY_POWER_PERCENT_ADDITIVE = 32;
+   UNIT_STAT_DODGE_NEGATE_PERCENT_ADDITIVE = 33;
+   UNIT_STAT_DEFLECTION_NEGATE_PERCENT_ADDITIVE = 34;
+   UNIT_STAT_ATTACK_CRITICAL_NEGATE_PERCENT_ADDITIVE = 35;
+   UNIT_STAT_ABILITY_CRITICAL_NEGATE_PERCENT_ADDITIVE = 36;
+   UNIT_STAT_DODGE_NEGATE_RATING = 37;
+   UNIT_STAT_DEFLECTION_NEGATE_RATING = 38;
+   UNIT_STAT_ATTACK_CRITICAL_NEGATE_RATING = 39;
+   UNIT_STAT_ABILITY_CRITICAL_NEGATE_RATING = 40;
+   UNIT_STAT_OFFENSE = 41;
+   UNIT_STAT_DEFENSE = 42;
+   UNIT_STAT_DEFENSE_PENETRATION = 43;
+   UNIT_STAT_EVASION_RATING = 44;
+   UNIT_STAT_CRITICAL_RATING = 45;
+   UNIT_STAT_EVASION_NEGATE_RATING = 46;
+   UNIT_STAT_CRITICAL_NEGATE_RATING = 47;
+   UNIT_STAT_OFFENSE_PERCENT_ADDITIVE = 48;
+   UNIT_STAT_DEFENSE_PERCENT_ADDITIVE = 49;
+   UNIT_STAT_DEFENSE_PENETRATION_PERCENT_ADDITIVE = 50;
+   UNIT_STAT_EVASION_PERCENT_ADDITIVE = 51;
+   UNIT_STAT_EVASION_NEGATE_PERCENT_ADDITIVE = 52;
+   UNIT_STAT_CRITICAL_CHANCE_PERCENT_ADDITIVE = 53;
+   UNIT_STAT_CRITICAL_NEGATE_CHANCE_PERCENT_ADDITIVE = 54;
+   UNIT_STAT_MAX_HEALTH_PERCENT_ADDITIVE = 55;
+   UNIT_STAT_MAX_SHIELD_PERCENT_ADDITIVE = 56;
+   UNIT_STAT_SPEED_PERCENT_ADDITIVE = 57;
+   UNIT_STAT_COUNTER_ATTACK_RATING = 58;
+   UNIT_STAT_TAUNT = 59;
+}
+enum UnitTier {
+   TIER_00 = 0;
+   TIER_01 = 1;
+   TIER_02 = 2;
+   TIER_03 = 3;
+   TIER_04 = 4;
+   TIER_05 = 5;
+   TIER_06 = 6;
+   TIER_07 = 7;
+   TIER_08 = 8;
+   TIER_09 = 9;
+   TIER_10 = 10;
+   TIER_11 = 11;
+   TIER_12 = 12;
+   TIER_13 = 13;
+   TIER_14 = 14;
+   TIER_15 = 15;
+   TIER_16 = 16;
+   TIER_17 = 17;
+   TIER_18 = 18;
+   TIER_19 = 19;
+   TIER_20 = 20;
+   TIER_21 = 21;
+   TIER_22 = 22;
+   TIER_23 = 23;
+   TIER_24 = 24;
+   TIER_25 = 25;
+}
+enum PlayerArenaType {
+   PlayerArena_None = 0;
+   SquadArena = 1;
+   FleetArena = 2;
+}
+message PlayerArenaStatus {
+   PlayerArenaType arena_type = 1;
+   int32 place = 2;
+   ArenaTeam arenaTeam = 3;
+   // unknown = 4;
+}
+
+message ArenaTeam {
+   repeated ArenaUnit arenaUnit = 1;
+   //int32 unknown1 = 4;
+   //int64 unknown2 = 7;
+}
+
+message ArenaUnit {
+   int32 id = 1;
+   string defId = 2;
+   int32 index = 3;
+   // int32 unknown1 = 11;
+   SlotType slotType = 12;
+   // int32 unknown2 = 17;
+}
+
+enum SlotType {
+   SlotTypeNONE = 0;
+   UNIT = 1;
+   LEADER = 2;
+   CAPITAL_SHIP = 3;
+   REINFORCMENT = 5;
+}

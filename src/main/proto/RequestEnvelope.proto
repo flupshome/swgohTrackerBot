@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package serenno.requestEnvelope;
+
+option java_multiple_files = true;
+
+enum AcceptEncoding {
+   DEFAULTACCEPTENCODING = 0;
+   GZIPACCEPTENCODING = 1;
+}
+message RequestEnvelope {
+    int32 correlation_id = 1;
+    string service_name = 4 ;
+    string method_name = 5 ;
+    bytes payload = 6;
+    string auth_id = 7 ;
+    string auth_token = 8 ;
+    int32 client_version = 9;
+    int64 client_startup_timestamp = 11;
+    string platform = 12 ;
+    string region = 13 ;
+    string client_external_version = 14 ;
+    string client_internal_version = 15 ;
+    string request_id = 16 ;
+    AcceptEncoding accept_encoding = 17 ;
+    repeated string flag = 18;
+    repeated string telemetry_event = 19;
+    int64 current_client_time = 20;
+    string nimble_session_id = 21 ;
+    string timezone = 22 ;
+    string firmware_version = 23 ;
+    string carrier = 24 ;
+    string network_access = 25 ;
+    string hardware_id = 26 ;
+    string advertiser_id = 27 ;
+    string vendor_id = 28 ;
+    string android_id = 29 ;
+    int32 jailbroken_flag = 30;
+    int32 piracy_flag = 31;
+    string synergy_id = 32 ;
+    string device_model = 33 ;
+    string device_id = 34 ;
+}
